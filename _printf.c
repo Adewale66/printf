@@ -28,8 +28,17 @@ int _printf(const char *format, ...)
 				buffer[bytes++] = fmt;
 			else if (fmt == 'c' || fmt == 's' || fmt == 'i' || fmt == 'd' || fmt == 'p')
 				error = non_custom_specifier(args, fmt, buffer, &total_bytes, &bytes);
-		}
-		else
+			else
+			{
+				if (bytes + 2 >= BUFFER)
+					error = overflow(buffer, &total_bytes, &bytes);
+				if (error != -1)
+				{
+					buffer[bytes++] = '%';
+					buffer[bytes++] = fmt;
+				}
+			}
+		} else
 			error = non_specifier(format[i], buffer, &total_bytes, &bytes);
 		if (error == -1)
 		{
@@ -37,11 +46,8 @@ int _printf(const char *format, ...)
 			va_end(args);
 			return (-1);
 		}
-	}
-	error = write(1, buffer, bytes);
+	} error = write(1, buffer, bytes);
 	free(buffer);
 	va_end(args);
-	if (error == -1)
-		return (-1);
 	return (total_bytes + bytes);
 }
