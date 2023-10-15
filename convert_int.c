@@ -3,39 +3,44 @@
 
 /**
  * convert_int - helper function to convert int to string
- * @n: number to convert
+ * @num: number to convert
  * Return: char pointer (string)
  */
 
-char *convert_int(int n)
+char *convert_int(int num)
 {
-	int length = 0, temp = n, i;
+	int isNegative = 0, length, i, temp;
 	char *str;
 
-	while (temp != 0)
+	if (num < 0)
 	{
-		temp /= 10;
+		isNegative = 1;
+		num = -num;
+	}
+
+	length = isNegative ? 2 : 1;
+
+	temp = num;
+	while (temp /= 10)
 		length++;
-	}
-	if (length == 0)
-	{
-		str = (char *)malloc(2 * sizeof(char));
-		if (str == NULL)
-			return (NULL);
-		str[0] = '0';
-		str[1] = '\0';
-		return (str);
-	}
-	str = (char *)malloc((length + 1) * sizeof(char));
+
+	str = (char *) malloc(length + 1);
+
 	if (str == NULL)
 		return (NULL);
+
 	i = length - 1;
-	while (n != 0)
-	{
-		str[i] = (char)((n % 10) + '0');
-		n /= 10;
-		i--;
-	}
-	str[length] = '\0';
+	str[i + 1] = '\0';
+
+
+	do {
+		str[i--] = num % 10 + '0';
+		num /= 10;
+	} while (num > 0);
+
+
+	if (isNegative)
+		str[0] = '-';
+
 	return (str);
 }
