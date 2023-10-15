@@ -9,11 +9,17 @@
  * Return: void
  */
 
-void overflow(char *buffer, int *tb, int *b)
+int overflow(char *buffer, int *tb, int *b)
 {
-	write(1, buffer, *b);
+	int error;
+
+	error = write(1, buffer, *b);
+	if (error == -1)
+		return (-1);
 	*tb = *tb + *b;
 	*b = 0;
+
+	return (0);
 }
 
 

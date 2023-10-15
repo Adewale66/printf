@@ -4,9 +4,10 @@
 
 int _strlen(const char *);
 int _printf(const char *, ...);
-void overflow(char *, int *, int *);
-void handle_str(char *, char *, int *, int *);
-int handle_int(int , char *, int *, int *);
+int overflow(char *, int *, int *);
+int handle_str(char *, char *, int *, int *);
+int handle_int(int, char *, int *, int *);
 char *convert_int(int);
+int non_specifier(char, char *, int *, int *);
 
 #endif

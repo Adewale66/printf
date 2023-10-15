@@ -10,16 +10,19 @@
  */
 
 
-void handle_str(char *string, char *buffer, int *tb, int *b)
+int handle_str(char *string, char *buffer, int *tb, int *b)
 {
-	int s_len = _strlen(string);
+	int s_len = _strlen(string), error;
 
 	if (s_len >= (BUFFER - *b))
-		overflow(buffer, tb, b);
+		error = overflow(buffer, tb, b);
+	if (error == -1)
+		return (-1);
 	while (*string != '\0')
 	{
 		buffer[*b] = *string;
 		*b = *b + 1;
 		string++;
 	}
+	return (0);
 }

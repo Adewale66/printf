@@ -31,7 +31,7 @@
 </pre>
 <h2><a id="EXAMPLES" href="#EXAMPLES"></a>EXAMPLES</h2><pre>
        To print <i>Hello world</i>
-           #include &lt;main.h&gt;
+           #include "main.h"
            char *s = "Hello world";
            _printf("%s", s);
 </pre>

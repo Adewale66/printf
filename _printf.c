@@ -2,6 +2,7 @@
 #include "main.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * _printf - custom printf function
@@ -12,8 +13,8 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int len = _strlen(format), i = 0, bytes = 0, total_bytes = 0;
-	char *buffer = (char *) malloc(sizeof(char) * BUFFER), fmt;
+	int len = _strlen(format), i = 0, bytes = 0, total_bytes = 0, error;
+	char *buffer = (char *) malloc(sizeof(char) * BUFFER);
 
 	if (buffer == NULL)
 		return (-1);
@@ -23,27 +24,25 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			fmt = format[i];
-			if (fmt == '%')
+			if (format[i] == '%')
 				buffer[bytes++] = '%';
-			else if (fmt == 'c')
+			else if (format[i] == 'c')
 				buffer[bytes++] = va_arg(args, int);
-			else if (fmt == 's')
-				handle_str(va_arg(args, char *), buffer, &total_bytes, &bytes);
+			else if (format[i] == 's')
+				error = handle_str(va_arg(args, char *), buffer, &total_bytes, &bytes);
 			else if (format[i] == 'i' || format[i] == 'd')
-				handle_int(va_arg(args, int), buffer, &total_bytes, &bytes);
-		}
-		else if (format[i] == '\n')
-		{
-			overflow(buffer, &total_bytes, &bytes);
-			buffer[bytes++] = format[i];
+				error = handle_int(va_arg(args, int), buffer, &total_bytes, &bytes);
 		}
 		else
-			buffer[bytes++] = format[i];
-		if (bytes >= BUFFER)
-			overflow(buffer, &total_bytes, &bytes);
+			error = non_specifier(format[i], buffer, &total_bytes, &bytes);
+		if (error == -1)
+		{
+			free(buffer);
+			va_end(args);
+			return (-1);
+		}
 	}
-	write(1, buffer, bytes);
+	error = write(1, buffer, bytes);
 	free(buffer);
 	va_end(args);
 	return (total_bytes + bytes);
