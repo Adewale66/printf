@@ -46,8 +46,27 @@ int _printf(const char *format, ...)
 			va_end(args);
 			return (-1);
 		}
-	} error = write(1, buffer, bytes);
+	}
+	return (exit_program(args, buffer, total_bytes, bytes));
+}
+
+/**
+ * exit_program - exits the program
+ * @args: args
+ * @buffer: buffer
+ * @tb: total bytes
+ * @b: bytes
+ * Return: int
+ */
+
+
+int exit_program(va_list args, char *buffer, int tb, int b)
+{
+	int error = write(1, buffer, b);
+
 	free(buffer);
 	va_end(args);
-	return (total_bytes + bytes);
+	if (error == -1)
+		return (-1);
+	return (tb + b);
 }

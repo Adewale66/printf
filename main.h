@@ -11,5 +11,7 @@ int handle_int(int, char *, int *, int *);
 char *convert_int(int);
 int non_specifier(char, char *, int *, int *);
 int non_custom_specifier(va_list, char, char *, int *, int *);
+int exit_program(va_list, char *, int, int);
+
 
 #endif
