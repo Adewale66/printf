@@ -82,59 +82,6 @@ int handle_bin(unsigned int n, char *buffer, int *tb, int *b)
 	return (0);
 }
 
-/**
- * rot13 - encodes a string using rot13.
- * @s: string parameter
- * @buffer: buffer
- * @tb: total_bytes
- * @b: bytes
- * Return: int
- */
-
-int rot13(char *s, char *buffer, int *tb, int *b)
-{
-	int i, j, error;
-	char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	char rot_val[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
-
-	if (s == NULL)
-		return (-1);
-
-	if (_strlen(s) > (BUFFER - *b))
-		error = overflow(buffer, tb, b);
-	if (error == -1)
-		return (-1);
-	for (i = 0; s[i] != '\0'; i++)
-		for (j = 0; j < 52; j++)
-			if (s[i] == characters[j])
-			{
-				buffer[(*b)++] = rot_val[j];
-				break;
-			}
-	return (0);
-}
-
-
-
-/**
- * _strcpy -  copies the string pointed to by src
- * @dest : destination parameter
- * @src: source parameter
- * Return: pointer
- */
-
-char *_strcpy(char *dest, char *src)
-{
-	int len = 0, i = 0;
-
-	while (src[len] != '\0')
-		len++;
-
-	for (; i <= len; i++)
-		dest[i] = src[i];
-	return (dest);
-}
-
 
 /**
  * handle_non_printable - hanldes non printable

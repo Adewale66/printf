@@ -176,3 +176,49 @@ int decToHexa(int n, char *buffer, int *b)
 	return (0);
 }
 
+/**
+ * convert_oct - converts int to binary
+ * @num: int
+ * Return: char *
+ */
+
+char *convert_oct(unsigned int num)
+{
+	int i = 0, j = 0;
+	char *c = (char *) malloc(sizeof(char) * 32), *n;
+
+	if (c == NULL)
+		return (NULL);
+	if (num == 0)
+	{
+		i = 1;
+		c[0] = '0';
+	}
+	else
+	{
+
+		while (num != 0)
+		{
+
+			c[i] = '0' + (num % 8);
+			i++;
+			num /= 8;
+		}
+	}
+
+	n = (char *) malloc(sizeof(char) * (i + 1));
+	if (n == NULL)
+		return (NULL);
+	while (j != i)
+	{
+		n[j] = c[j];
+		j++;
+	}
+	n[j] = '\0';
+	free(c);
+	reverse(n);
+
+	return (n);
+}
+
+

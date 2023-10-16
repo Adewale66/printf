@@ -29,7 +29,9 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	else if (c == 'i' || c == 'd')
 		error = handle_int(va_arg(args, int), buffer, tb, b);
 	else if (c == 'u')
-		error = handle_unsigned_int(va_arg(args, unsigned int), buffer, tb, b);
+		error = handle_unsigned_int(va_arg(args, unsigned int), buffer, tb, b, c);
+	else if (c == 'o')
+		error = handle_unsigned_int(va_arg(args, unsigned int), buffer, tb, b, c);
 	if (*b > BUFFER && error != -1)
 		error = overflow(buffer, tb, b);
 	if (error == -1)
@@ -44,7 +46,7 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
  * @buffer: buffer
  * @tb: total_bytes
  * @b: bytes
- * Return: ll
+ * Return: int
  */
 
 int handle_int(int n, char *buffer, int *tb, int *b)
@@ -104,12 +106,13 @@ int handle_str(char *s, char *buffer, int *tb, int *b)
  * @buffer: buffer
  * @tb: total_bytes
  * @b: bytes
+ * @t: type
  * Return: void
  */
 
-int handle_unsigned_int(unsigned int n, char *buffer, int *tb, int *b)
+int handle_unsigned_int(unsigned int n, char *buffer, int *tb, int *b, char t)
 {
-	char *int_str = convert_unsigned_int(n);
+	char *int_str = t == 'o' ? convert_oct(n) : convert_unsigned_int(n);
 	int len, error;
 
 	if (int_str == NULL)
