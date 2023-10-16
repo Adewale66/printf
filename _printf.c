@@ -34,7 +34,7 @@ int _printf(const char *ft, ...)
 			else if (*ft == 'l' || *ft == 'h')
 				error = 0;
 			else if (*ft == 'u' || *ft == 'o' || *ft == 'x' || *ft == 'X')
-				error = 0;
+				error = non_custom_specifier(args, *ft, buffer, &total_bytes, &bytes);
 			else
 				error = handle_unknown(*ft, buffer, &total_bytes, &bytes);
 		}

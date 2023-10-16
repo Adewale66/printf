@@ -10,6 +10,7 @@ int handle_str(char *, char *, int *, int *);
 int handle_int(int, char *, int *, int *);
 int handle_bin(unsigned int, char *, int *, int *);
 char *convert_int(int);
+char *convert_unsigned_int(unsigned int);
 char *convert_bin(unsigned int);
 int non_specifier(char, char *, int *, int *);
 int non_custom_specifier(va_list, char, char *, int *, int *);
@@ -22,6 +23,8 @@ int rot13(char *, char *, int *, int *);
 char *_strcpy(char *, char *);
 int handle_non_printable(char *, char *, int *, int *);
 int decToHexa(int, char *, int *);
+int handle_unsigned_int(unsigned int, char *, int *, int *);
+
 
 
 
