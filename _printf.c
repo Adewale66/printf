@@ -5,50 +5,53 @@
 
 /**
  * _printf - custom printf function
- * @format: format of string
+ * @ft: format of string
  * Return: int (Number of bytes)
  */
 
-int _printf(const char *format, ...)
+int _printf(const char *ft, ...)
 {
 	va_list args;
-	int len = _strlen(format), i = 0, bytes = 0, total_bytes = 0, error;
-	char *buffer = (char *) malloc(sizeof(char) * BUFFER), fmt;
+	int bytes = 0, total_bytes = 0, error;
+	char buffer[BUFFER];
 
-	if (buffer == NULL)
-		return (-1);
-	va_start(args, format);
-	for (; i < len; i++)
+	va_start(args, ft);
+	while (*ft != '\0')
 	{
-		if (format[i] == '%')
+		if (*ft == '%')
 		{
-			i++;
-			fmt = format[i];
-			if (fmt == '%')
-				buffer[bytes++] = fmt;
-			else if (fmt == 'c' || fmt == 's' || fmt == 'i' || fmt == 'd' || fmt == 'p')
-				error = non_custom_specifier(args, fmt, buffer, &total_bytes, &bytes);
+			++ft;
+			if (*ft == '%')
+				buffer[bytes++] = *ft;
+			else if (*ft == 'c' || *ft == 's' || *ft == 'i' || *ft == 'd' || *ft == 'p')
+				error = non_custom_specifier(args, *ft, buffer, &total_bytes, &bytes);
+			else if (*ft == 'b' || *ft == 'R' || *ft == 'S')
+				error = custom_specifier(args, *ft, buffer, &total_bytes, &bytes);
+			else if (*ft == '0' || *ft == '-' || *ft == '+' || *ft == '#' || *ft == ' ')
+				error = 0;
+			else if (*ft == 'l' || *ft == 'h')
+				error = 0;
+			else if (*ft == 'u' || *ft == 'o' || *ft == 'x' || *ft == 'X')
+				error = 0;
 			else
 			{
-				if (bytes + 2 >= BUFFER)
+				if (bytes + 2 > BUFFER)
 					error = overflow(buffer, &total_bytes, &bytes);
 				if (error != -1)
 				{
 					buffer[bytes++] = '%';
-					buffer[bytes++] = fmt;
+					buffer[bytes++] = *ft;
 				}
 			}
 		} else
-			error = non_specifier(format[i], buffer, &total_bytes, &bytes);
+			error = non_specifier(*ft, buffer, &total_bytes, &bytes);
 		if (error == -1)
-		{
-			free(buffer);
-			va_end(args);
-			return (-1);
-		}
+			return (exit_error(args));
+		ft++;
 	}
 	return (exit_program(args, buffer, total_bytes, bytes));
 }
+
 
 /**
  * exit_program - exits the program
@@ -64,9 +67,22 @@ int exit_program(va_list args, char *buffer, int tb, int b)
 {
 	int error = write(1, buffer, b);
 
-	free(buffer);
 	va_end(args);
 	if (error == -1)
 		return (-1);
 	return (tb + b);
 }
+
+/**
+ * exit_error - exits the program
+ * @args: args
+ * Return: int
+ */
+
+
+int exit_error(va_list args)
+{
+	va_end(args);
+	return (-1);
+}
+

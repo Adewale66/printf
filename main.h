@@ -8,10 +8,13 @@ int _printf(const char *, ...);
 int overflow(char *, int *, int *);
 int handle_str(char *, char *, int *, int *);
 int handle_int(int, char *, int *, int *);
+int handle_bin(int, char *, int *, int *);
 char *convert_int(int);
+void convert_bin(int);
 int non_specifier(char, char *, int *, int *);
 int non_custom_specifier(va_list, char, char *, int *, int *);
+int custom_specifier(va_list, char, char *, int *, int *);
 int exit_program(va_list, char *, int, int);
-
-
+int exit_error(va_list);
+void reverse(char *, int); 
 #endif

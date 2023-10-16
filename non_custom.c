@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include "main.h"
+#include <stdlib.h>
 
 /**
  * non_custom_specifier -helper function to handle no specifier
@@ -29,5 +30,63 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 		error = overflow(buffer, tb, b);
 	if (error == -1)
 		return (-1);
+	return (0);
+}
+
+
+/**
+ * handle_int - handles integers
+ * @n: integer
+ * @buffer: buffer
+ * @tb: total_bytes
+ * @b: bytes
+ * Return: ll
+ */
+
+int handle_int(int n, char *buffer, int *tb, int *b)
+{
+	char *int_str = convert_int(n);
+	int len, error;
+
+	if (int_str == NULL)
+		return (-1);
+	len = _strlen(int_str);
+	if (len >= (BUFFER - *b))
+		error = overflow(buffer, tb, b);
+	if (error == -1)
+	{
+		free(int_str);
+		return (-1);
+	}
+	handle_str(int_str, buffer, tb, b);
+	free(int_str);
+	return (0);
+}
+
+
+/**
+ * handle_str - handles string modifier
+ * @string: string parameter
+ * @buffer: buffer
+ * @tb: total_bytes
+ * @b: bytes
+ * Return: void
+ */
+
+
+int handle_str(char *string, char *buffer, int *tb, int *b)
+{
+	int s_len = _strlen(string), error;
+
+	if (s_len >= (BUFFER - *b))
+		error = overflow(buffer, tb, b);
+	if (error == -1)
+		return (-1);
+	while (*string != '\0')
+	{
+		buffer[*b] = *string;
+		*b = *b + 1;
+		string++;
+	}
 	return (0);
 }
