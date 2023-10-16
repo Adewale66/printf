@@ -13,6 +13,7 @@ char *convert_int(int);
 char *convert_bin(unsigned int);
 int non_specifier(char, char *, int *, int *);
 int non_custom_specifier(va_list, char, char *, int *, int *);
+int handle_unknown(char, char *, int *, int *);
 int custom_specifier(va_list, char, char *, int *, int *);
 int exit_program(va_list, char *, int, int);
 int exit_error(va_list);

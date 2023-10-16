@@ -17,10 +17,7 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	int error;
 
 	if (c == 'c')
-	{
-		buffer[*b] = va_arg(args, int);
-		*b = *b + 1;
-	}
+		buffer[(*b)++] = va_arg(args, int);
 	else if (c == 's')
 		error = handle_str(va_arg(args, char *), buffer, tb, b);
 	else if (c == 'i' || c == 'd')
@@ -89,8 +86,7 @@ int handle_str(char *s, char *buffer, int *tb, int *b)
 		return (-1);
 	while (*s != '\0')
 	{
-		buffer[*b] = *s;
-		*b = *b + 1;
+		buffer[(*b)++] = *s;
 		s++;
 	}
 	return (0);

@@ -15,6 +15,8 @@ int _printf(const char *ft, ...)
 	int bytes = 0, total_bytes = 0, error;
 	char buffer[BUFFER];
 
+	if (ft == NULL)
+		return (-1);
 	va_start(args, ft);
 	while (*ft != '\0')
 	{
@@ -34,16 +36,9 @@ int _printf(const char *ft, ...)
 			else if (*ft == 'u' || *ft == 'o' || *ft == 'x' || *ft == 'X')
 				error = 0;
 			else
-			{
-				if (bytes + 2 > BUFFER)
-					error = overflow(buffer, &total_bytes, &bytes);
-				if (error != -1)
-				{
-					buffer[bytes++] = '%';
-					buffer[bytes++] = *ft;
-				}
-			}
-		} else
+				error = handle_unknown(*ft, buffer, &total_bytes, &bytes);
+		}
+		else
 			error = non_specifier(*ft, buffer, &total_bytes, &bytes);
 		if (error == -1)
 			return (exit_error(args));
@@ -86,3 +81,27 @@ int exit_error(va_list args)
 	return (-1);
 }
 
+/**
+ * handle_unknown - helper function for unknown specifiers
+ * @c: spec
+ * @buffer: buffer
+ * @total_bytes: total_bytes
+ * @bytes: bytes
+ * Return: int
+ */
+
+int handle_unknown(char c, char *buffer, int *total_bytes, int *bytes)
+{
+	int error;
+
+	if (*bytes + 2 > BUFFER)
+		error = overflow(buffer, total_bytes, bytes);
+	if (error != -1)
+	{
+		buffer[(*bytes)++] = '%';
+		buffer[(*bytes)++] = c;
+		return (0);
+	}
+	return (-1);
+
+}

@@ -22,6 +22,7 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	else if (c == 'r')
 	{
 		char *c = va_arg(args, char *);
+
 		reverse(c);
 	}
 	else if (c == 'R')
