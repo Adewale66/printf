@@ -37,18 +37,17 @@ int decToHexa(int n, char *buffer, int *b)
 		i++;
 		j--;
 	}
-
 	res = (char *) malloc(_strlen(hexBuffer) + 1);
 
 	if (res != NULL)
 		_strcpy(res, hexBuffer);
-
 	buffer[(*b)++] = 92;
 	buffer[(*b)++] = 'x';
-	if (_strlen(res) == 1)
+	if (_strlen(res) < 2)
 		buffer[(*b)++] = '0';
 	buffer[(*b)++] = res[0];
-	buffer[(*b)++] = res[1];
+	if (_strlen(res) > 1)
+		buffer[(*b)++] = res[1];
 	free(res);
 	return (0);
 }
