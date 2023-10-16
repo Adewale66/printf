@@ -14,7 +14,7 @@
 
 int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 {
-	int error;
+	int error = 0;
 
 	if (c == 'c')
 	{
@@ -52,7 +52,7 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 int handle_int(int n, char *buffer, int *tb, int *b)
 {
 	char *int_str = convert_int(n);
-	int len, error;
+	int len, error = 0;
 
 	if (int_str == NULL)
 		return (-1);
@@ -84,7 +84,7 @@ int handle_int(int n, char *buffer, int *tb, int *b)
 
 int handle_str(char *s, char *buffer, int *tb, int *b)
 {
-	int s_len = _strlen(s), error;
+	int s_len = _strlen(s), error = 0;
 
 	if (s == NULL)
 		return (-1);
@@ -113,7 +113,7 @@ int handle_str(char *s, char *buffer, int *tb, int *b)
 int handle_unsigned_int(unsigned int n, char *buffer, int *tb, int *b, char t)
 {
 	char *int_str = t == 'o' ? convert_oct(n) : convert_unsigned_int(n);
-	int len, error;
+	int len, error = 0;
 
 	if (int_str == NULL)
 		return (-1);

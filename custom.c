@@ -15,7 +15,7 @@
 
 int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 {
-	int error;
+	int error = 0;
 
 	if (c == 'b')
 		error = handle_bin(va_arg(args, unsigned int), buffer, tb, b);
@@ -58,7 +58,7 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 int handle_bin(unsigned int n, char *buffer, int *tb, int *b)
 {
 	char *bin;
-	int len, error;
+	int len, error = 0;
 
 	if (n > 4294967294)
 		return (-1);

@@ -30,7 +30,7 @@ char *_strcpy(char *dest, char *src)
 
 int rot13(char *s, char *buffer, int *tb, int *b)
 {
-	int i, j, error;
+	int i, j, error = 0;
 	char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	char rot_val[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
 

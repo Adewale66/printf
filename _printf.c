@@ -12,7 +12,7 @@
 int _printf(const char *ft, ...)
 {
 	va_list args;
-	int bytes = 0, total_bytes = 0, error;
+	int bytes = 0, total_bytes = 0, error = 0;
 	char buffer[BUFFER];
 
 	if (ft == NULL)
@@ -92,7 +92,7 @@ int exit_error(va_list args)
 
 int handle_unknown(char c, char *buffer, int *total_bytes, int *bytes)
 {
-	int error;
+	int error = 0;
 
 	if (*bytes + 2 > BUFFER)
 		error = overflow(buffer, total_bytes, bytes);
@@ -117,7 +117,7 @@ int handle_unknown(char c, char *buffer, int *total_bytes, int *bytes)
 
 int non_specifier(char c, char *buffer, int *tb, int *b)
 {
-	int error;
+	int error = 0;
 
 	if (c == '\n')
 	{
