@@ -1,19 +1,19 @@
 #include <stdlib.h>
 #include "main.h"
-#include <stdio.h>
-
 
 /**
  * convert_bin - converts int to binary
+ * @num: int
+ * Return: char *
  */
 
-void convert_bin(int num)
+char *convert_bin(int num)
 {
 	int i = 0, j = 0;
-	char *c = (char *) malloc (sizeof(char) * 32);
+	char *c = (char *) malloc(sizeof(char) * 32), *n;
 
 	if (c == NULL)
-		return;
+		return (NULL);
 	while (num != 0)
 	{
 		if (num % 2 == 0)
@@ -23,11 +23,9 @@ void convert_bin(int num)
 		i++;
 		num /= 2;
 	}
-	char *n = (char *) malloc (sizeof(char) * (i + 1));
-
+	n = (char *) malloc(sizeof(char) * (i + 1));
 	if (n == NULL)
-		return;
-
+		return (NULL);
 	while (j != i)
 	{
 		n[j] = c[j];
@@ -37,5 +35,5 @@ void convert_bin(int num)
 	free(c);
 	reverse(n, j);
 
-	printf("%s\n", n);
+	return (n);
 }

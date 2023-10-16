@@ -58,8 +58,10 @@ int handle_int(int n, char *buffer, int *tb, int *b)
 		free(int_str);
 		return (-1);
 	}
-	handle_str(int_str, buffer, tb, b);
+	error = handle_str(int_str, buffer, tb, b);
 	free(int_str);
+	if (error == -1)
+		return (-1);
 	return (0);
 }
 
