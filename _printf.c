@@ -103,5 +103,4 @@ int handle_unknown(char c, char *buffer, int *total_bytes, int *bytes)
 		return (0);
 	}
 	return (-1);
-
 }

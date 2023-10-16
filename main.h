@@ -20,5 +20,9 @@ int exit_error(va_list);
 void reverse(char *); 
 int rot13(char *, char *, int *, int *);
 char *_strcpy(char *, char *);
+int handle_non_printable(char *, char *, int *, int *);
+char *decToHexa(int);
+
+
 
 #endif

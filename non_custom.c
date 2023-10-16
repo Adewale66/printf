@@ -17,11 +17,29 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	int error;
 
 	if (c == 'c')
-		buffer[(*b)++] = va_arg(args, int);
+	{
+		int t = va_arg(args, int);
+
+		if (t < 32 || t > 126)
+			return (-1);
+		buffer[(*b)++] = t;
+	}
 	else if (c == 's')
-		error = handle_str(va_arg(args, char *), buffer, tb, b);
+	{
+		char *s = va_arg(args, char *);
+
+		if (s == NULL)
+			return (-1);
+		error = handle_str(s, buffer, tb, b);
+	}
 	else if (c == 'i' || c == 'd')
-		error = handle_int(va_arg(args, int), buffer, tb, b);
+	{
+		int d = va_arg(args, int);
+
+		if (!d)
+			return (-1);
+		error = handle_int(d, buffer, tb, b);
+	}
 
 	if (*b >= BUFFER && error != -1)
 		error = overflow(buffer, tb, b);

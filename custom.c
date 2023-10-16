@@ -20,13 +20,9 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	if (c == 'b')
 		error = handle_bin(va_arg(args, unsigned int), buffer, tb, b);
 	else if (c == 'R')
-	{
-		char *c = va_arg(args, char *);
-
-		error = rot13(c, buffer, tb, b);
-		if (error == -1)
-			return (-1);
-	}
+		error = rot13(va_arg(args, char *), buffer, tb, b);
+	else if (c == 'S')
+		error = handle_non_printable(va_arg(args, char *), buffer, tb, b);
 	else if (c == 'r')
 	{
 		char *c = va_arg(args, char *);
@@ -39,7 +35,6 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 		error = handle_str(t, buffer, tb, b);
 		free(t);
 	}
-
 	if (error == -1)
 		return (-1);
 	return (0);
@@ -96,6 +91,9 @@ int rot13(char *s, char *buffer, int *tb, int *b)
 	char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	char rot_val[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
 
+	if (s == NULL)
+		return (-1);
+
 	if (_strlen(s) > (BUFFER - *b))
 		error = overflow(buffer, tb, b);
 	if (error == -1)
@@ -129,4 +127,58 @@ char *_strcpy(char *dest, char *src)
 	for (; i <= len; i++)
 		dest[i] = src[i];
 	return (dest);
+}
+
+
+/**
+ * handle_non_printable - hanldes non printable
+ * @s: string
+ * @buffer: buffer
+ * @tb: total bytes
+ * @b: bytes
+ * Return: int
+ */
+
+int handle_non_printable(char *s, char *buffer, int *tb, int *b)
+{
+	int error;
+
+	if (s == NULL)
+		return (-1);
+	while (*s != '\0')
+	{
+		if (*s < 32 || *s > 126)
+		{
+			if (*b + 4 > (BUFFER - *b))
+				error = overflow(buffer, tb, b);
+			if (error != -1)
+			{
+				char *t = decToHexa(*s);
+
+				if (t == NULL)
+					return (-1);
+				buffer[(*b)++] = 92;
+				buffer[(*b)++] = 'x';
+				if (_strlen(t) == 1)
+					buffer[(*b)++] = '0';
+
+				buffer[(*b)++] = t[0];
+				buffer[(*b)++] = t[1];
+
+			}
+			else
+				return (-1);
+		}
+		else
+		{
+			if (*b + 2 > (BUFFER - *b))
+				error = overflow(buffer, tb, b);
+			if (error != -1)
+				buffer[(*b)++] = *s;
+			else
+				return (-1);
+		}
+		s++;
+	}
+	return (0);
 }
