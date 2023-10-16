@@ -7,7 +7,7 @@
  * Return: char *
  */
 
-char *convert_bin(int num)
+char *convert_bin(unsigned int num)
 {
 	int i = 0, j = 0;
 	char *c = (char *) malloc(sizeof(char) * 32), *n;

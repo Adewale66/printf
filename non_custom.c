@@ -68,7 +68,7 @@ int handle_int(int n, char *buffer, int *tb, int *b)
 
 /**
  * handle_str - handles string modifier
- * @string: string parameter
+ * @s: string parameter
  * @buffer: buffer
  * @tb: total_bytes
  * @b: bytes
@@ -76,22 +76,22 @@ int handle_int(int n, char *buffer, int *tb, int *b)
  */
 
 
-int handle_str(char *string, char *buffer, int *tb, int *b)
+int handle_str(char *s, char *buffer, int *tb, int *b)
 {
-	int s_len = _strlen(string), error;
+	int s_len = _strlen(s), error;
 
-	if (string == NULL)
-		return (-1);
+	if (s == NULL)
+		s = "(null)";
 
 	if (s_len >= (BUFFER - *b))
 		error = overflow(buffer, tb, b);
 	if (error == -1)
 		return (-1);
-	while (*string != '\0')
+	while (*s != '\0')
 	{
-		buffer[*b] = *string;
+		buffer[*b] = *s;
 		*b = *b + 1;
-		string++;
+		s++;
 	}
 	return (0);
 }
