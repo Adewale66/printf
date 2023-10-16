@@ -25,7 +25,7 @@ int _printf(const char *ft, ...)
 				buffer[bytes++] = *ft;
 			else if (*ft == 'c' || *ft == 's' || *ft == 'i' || *ft == 'd' || *ft == 'p')
 				error = non_custom_specifier(args, *ft, buffer, &total_bytes, &bytes);
-			else if (*ft == 'b' || *ft == 'R' || *ft == 'S')
+			else if (*ft == 'b' || *ft == 'R' || *ft == 'S' || *ft == 'r')
 				error = custom_specifier(args, *ft, buffer, &total_bytes, &bytes);
 			else if (*ft == '0' || *ft == '-' || *ft == '+' || *ft == '#' || *ft == ' ')
 				error = 0;

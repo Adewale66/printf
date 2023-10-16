@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+
 /**
  * custom_specifier - handles custom specifiers
  * @args: args
@@ -17,7 +18,15 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	int error;
 
 	if (c == 'b')
-		error = handle_bin(va_arg(args, int), buffer, tb, b);
+		error = handle_bin(va_arg(args, unsigned int), buffer, tb, b);
+	else if (c == 'r')
+	{
+		char *c = va_arg(args, char *);
+
+		reverse(c);
+	}
+	else if (c == 'R')
+		error = handle_str(rot13(va_arg(args, char *)), buffer, tb, b);
 
 	if (error == -1)
 		return (-1);
@@ -60,4 +69,24 @@ int handle_bin(unsigned int n, char *buffer, int *tb, int *b)
 	return (0);
 }
 
+/**
+ * rot13 - encodes a string using rot13.
+ * @s: string parameter
+ * Return: char *
+ */
 
+char *rot13(char *s)
+{
+	int i, j;
+	char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char rot_val[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+
+	for (i = 0; s[i] != '\0'; i++)
+		for (j = 0; j < 52; j++)
+			if (s[i] == characters[j])
+			{
+				s[i] = rot_val[j];
+				break;
+			}
+	return (s);
+}

@@ -16,5 +16,6 @@ int non_custom_specifier(va_list, char, char *, int *, int *);
 int custom_specifier(va_list, char, char *, int *, int *);
 int exit_program(va_list, char *, int, int);
 int exit_error(va_list);
-void reverse(char *, int); 
+void reverse(char *); 
+char *rot13(char *);
 #endif

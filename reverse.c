@@ -3,13 +3,12 @@
 /**
  * reverse - reverses the content of an array of integers.
  * @a: array
- * @n: length of array
  * Return: void
  */
 
-void reverse(char *a, int n)
+void reverse(char *a)
 {
-	int i = 0;
+	int i = 0, n = _strlen(a);
 
 	for (; i < n / 2; i++)
 	{

@@ -80,6 +80,9 @@ int handle_str(char *string, char *buffer, int *tb, int *b)
 {
 	int s_len = _strlen(string), error;
 
+	if (string == NULL)
+		return (-1);
+
 	if (s_len >= (BUFFER - *b))
 		error = overflow(buffer, tb, b);
 	if (error == -1)

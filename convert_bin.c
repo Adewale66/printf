@@ -33,7 +33,7 @@ char *convert_bin(int num)
 	}
 	n[j] = '\0';
 	free(c);
-	reverse(n, j);
+	reverse(n);
 
 	return (n);
 }
