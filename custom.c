@@ -142,6 +142,7 @@ char *_strcpy(char *dest, char *src)
 int handle_non_printable(char *s, char *buffer, int *tb, int *b)
 {
 	int error;
+	char *t = NULL;
 
 	if (s == NULL)
 		return (-1);
@@ -153,7 +154,7 @@ int handle_non_printable(char *s, char *buffer, int *tb, int *b)
 				error = overflow(buffer, tb, b);
 			if (error != -1)
 			{
-				char *t = decToHexa(*s);
+				t = decToHexa(*s);
 
 				if (t == NULL)
 					return (-1);
@@ -164,10 +165,13 @@ int handle_non_printable(char *s, char *buffer, int *tb, int *b)
 
 				buffer[(*b)++] = t[0];
 				buffer[(*b)++] = t[1];
-
 			}
 			else
+			{
+				if (t != NULL)
+					free(t);
 				return (-1);
+			}
 		}
 		else
 		{
@@ -176,9 +180,14 @@ int handle_non_printable(char *s, char *buffer, int *tb, int *b)
 			if (error != -1)
 				buffer[(*b)++] = *s;
 			else
+			{
+				if (t != NULL)
+					free(t);
 				return (-1);
+			}
 		}
 		s++;
 	}
+	free(t);
 	return (0);
 }
