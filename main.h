@@ -18,5 +18,7 @@ int custom_specifier(va_list, char, char *, int *, int *);
 int exit_program(va_list, char *, int, int);
 int exit_error(va_list);
 void reverse(char *); 
-char *rot13(char *);
+int rot13(char *, char *, int *, int *);
+char *_strcpy(char *, char *);
+
 #endif
