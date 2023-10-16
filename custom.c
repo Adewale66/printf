@@ -30,7 +30,8 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	else if (c == 'r')
 	{
 		char *c = va_arg(args, char *);
-		char *t = (char *) malloc (sizeof(char) * (_strlen(c) + 1));
+		char *t = (char *) malloc(sizeof(char) * (_strlen(c) + 1));
+
 		if (t == NULL)
 			return (-1);
 		_strcpy(t, c);
