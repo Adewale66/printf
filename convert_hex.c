@@ -5,32 +5,27 @@
 /**
  * decToHexa - converts dev to hex
  * @n: int
+ * @buffer: buffer
+ * @b: bytes
  * Return: char *
  */
 
-char *decToHexa(int n)
+int decToHexa(int n, char *buffer, int *b)
 {
 	char hexBuffer[9], ch, *res;
-	int index = 0, i, j;
+	int index = 0, i, j, rem = 0;
 
 	while (n != 0)
 	{
-		int rem = 0;
-
 		rem = n % 16;
 		if (rem < 10)
 			ch = rem + '0';
 		else
 			ch = rem + 'A' - 10;
-
 		hexBuffer[index++] = ch;
 		n = n / 16;
 	}
-
-
 	hexBuffer[index] = '\0';
-
-
 	i = 0;
 	j = index - 1;
 	while (i <= j)
@@ -48,6 +43,13 @@ char *decToHexa(int n)
 	if (res != NULL)
 		_strcpy(res, hexBuffer);
 
-	return (res);
+	buffer[(*b)++] = 92;
+	buffer[(*b)++] = 'x';
+	if (_strlen(res) == 1)
+		buffer[(*b)++] = '0';
+	buffer[(*b)++] = res[0];
+	buffer[(*b)++] = res[1];
+	free(res);
+	return (0);
 }
 

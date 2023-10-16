@@ -22,7 +22,13 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	else if (c == 'R')
 		error = rot13(va_arg(args, char *), buffer, tb, b);
 	else if (c == 'S')
-		error = handle_non_printable(va_arg(args, char *), buffer, tb, b);
+	{
+		char *s = va_arg(args, char*);
+
+		if (s == NULL)
+			return (-1);
+		error = handle_non_printable(s, buffer, tb, b);
+	}
 	else if (c == 'r')
 	{
 		char *c = va_arg(args, char *);
@@ -141,8 +147,7 @@ char *_strcpy(char *dest, char *src)
 
 int handle_non_printable(char *s, char *buffer, int *tb, int *b)
 {
-	int error;
-	char *t = NULL;
+	int error = 0;
 
 	if (s == NULL)
 		return (-1);
@@ -150,44 +155,27 @@ int handle_non_printable(char *s, char *buffer, int *tb, int *b)
 	{
 		if (*s < 32 || *s > 126)
 		{
-			if (*b + 4 > (BUFFER - *b))
+			if (*b + 4 > BUFFER)
 				error = overflow(buffer, tb, b);
 			if (error != -1)
 			{
-				t = decToHexa(*s);
-
-				if (t == NULL)
+				error = decToHexa(*s, buffer, b);
+				if (error == -1)
 					return (-1);
-				buffer[(*b)++] = 92;
-				buffer[(*b)++] = 'x';
-				if (_strlen(t) == 1)
-					buffer[(*b)++] = '0';
-
-				buffer[(*b)++] = t[0];
-				buffer[(*b)++] = t[1];
 			}
 			else
-			{
-				if (t != NULL)
-					free(t);
 				return (-1);
-			}
 		}
 		else
 		{
-			if (*b + 2 > (BUFFER - *b))
+			if (*b + 1 > BUFFER)
 				error = overflow(buffer, tb, b);
 			if (error != -1)
 				buffer[(*b)++] = *s;
 			else
-			{
-				if (t != NULL)
-					free(t);
 				return (-1);
-			}
 		}
 		s++;
 	}
-	free(t);
 	return (0);
 }

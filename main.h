@@ -17,11 +17,11 @@ int handle_unknown(char, char *, int *, int *);
 int custom_specifier(va_list, char, char *, int *, int *);
 int exit_program(va_list, char *, int, int);
 int exit_error(va_list);
-void reverse(char *); 
+void reverse(char *);
 int rot13(char *, char *, int *, int *);
 char *_strcpy(char *, char *);
 int handle_non_printable(char *, char *, int *, int *);
-char *decToHexa(int);
+int decToHexa(int, char *, int *);
 
 
 
