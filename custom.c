@@ -68,7 +68,7 @@ int handle_bin(unsigned int n, char *buffer, int *tb, int *b)
 	if (bin == NULL)
 		return (-1);
 	len = _strlen(bin);
-	if (len >= (BUFFER - *b))
+	if (len > (BUFFER - *b))
 		error = overflow(buffer, tb, b);
 	if (error == -1)
 	{

@@ -22,7 +22,6 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 
 		if (c == '\0')
 			return (-1);
-
 		buffer[(*b)++] = t;
 	}
 	else if (c == 's')
@@ -41,7 +40,7 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 		error = handle_int(d, buffer, tb, b);
 	}
 
-	if (*b >= BUFFER && error != -1)
+	if (*b > BUFFER && error != -1)
 		error = overflow(buffer, tb, b);
 	if (error == -1)
 		return (-1);
@@ -66,7 +65,7 @@ int handle_int(int n, char *buffer, int *tb, int *b)
 	if (int_str == NULL)
 		return (-1);
 	len = _strlen(int_str);
-	if (len >= (BUFFER - *b))
+	if (len > (BUFFER - *b))
 		error = overflow(buffer, tb, b);
 	if (error == -1)
 	{
@@ -96,9 +95,9 @@ int handle_str(char *s, char *buffer, int *tb, int *b)
 	int s_len = _strlen(s), error;
 
 	if (s == NULL)
-		s = "(null)";
+		return (-1);
 
-	if (s_len >= (BUFFER - *b))
+	if (s_len > (BUFFER - *b))
 		error = overflow(buffer, tb, b);
 	if (error == -1)
 		return (-1);
