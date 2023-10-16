@@ -14,15 +14,25 @@ char *convert_bin(unsigned int num)
 
 	if (c == NULL)
 		return (NULL);
-	while (num != 0)
+	if (num == 0)
 	{
-		if (num % 2 == 0)
-			c[i] = '0';
-		else
-			c[i] = '1';
-		i++;
-		num /= 2;
+		i = 1;
+		c[0] = '0';
 	}
+	else
+	{
+
+		while (num != 0)
+		{
+			if (num % 2 == 0)
+				c[i] = '0';
+			else
+				c[i] = '1';
+			i++;
+			num /= 2;
+		}
+	}
+
 	n = (char *) malloc(sizeof(char) * (i + 1));
 	if (n == NULL)
 		return (NULL);
