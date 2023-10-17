@@ -22,7 +22,7 @@ char *_strcpy(char *dest, char *src)
 }
 /**
  * rot13 - encodes a string using rot13.
- * @src: string parameter
+ * @s: string parameter
  * @buffer: buffer
  * @tb: total_bytes
  * @b: bytes

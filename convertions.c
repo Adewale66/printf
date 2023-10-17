@@ -33,8 +33,7 @@ char *convert_int(long num)
 	i = length - 1;
 	str[i + 1] = '\0';
 
-	do
-	{
+	do {
 		str[i--] = num % 10 + '0';
 		num /= 10;
 	} while (num > 0);
@@ -71,8 +70,7 @@ char *convert_unsigned_int(unsigned int num)
 	i = length - 1;
 	str[i + 1] = '\0';
 
-	do
-	{
+	do {
 		str[i--] = num % 10 + '0';
 		num /= 10;
 	} while (num > 0);
