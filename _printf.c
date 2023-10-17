@@ -98,6 +98,8 @@ int handle_unknown(char c, char *buffer, int *total_bytes, int *bytes)
 		error = overflow(buffer, total_bytes, bytes);
 	if (error != -1)
 	{
+		if (c < 33 || c > 126)
+			return (-1);
 		buffer[(*bytes)++] = '%';
 		buffer[(*bytes)++] = c;
 		return (0);
