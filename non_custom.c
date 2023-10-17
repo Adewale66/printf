@@ -27,7 +27,7 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	else if (c == 's')
 		err = handle_str(va_arg(args, char*), buffer, tb, b);
 	else if (c == 'i' || c == 'd')
-		err = handle_int(va_arg(args, int), buffer, tb, b);
+		err = handle_int(va_arg(args, long), buffer, tb, b);
 	else if (c == 'u')
 		err = unsigned_int(va_arg(args, unsigned long int), buffer, tb, b, c);
 	else if (c == 'o')

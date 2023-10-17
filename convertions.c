@@ -7,7 +7,7 @@
  * Return: char pointer (string)
  */
 
-char *convert_int (int num)
+char *convert_int (long num)
 {
 	int isNegative = 0, length, i;
 	char *str;
