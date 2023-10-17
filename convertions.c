@@ -54,8 +54,9 @@ char *convert_int (long num)
 
 char *convert_unsigned_int(unsigned long num)
 {
-	int length, i, temp;
+	int length, i;
 	char *str;
+	unsigned long temp;
 
 	length = 1;
 
