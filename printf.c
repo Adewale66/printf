@@ -127,15 +127,13 @@ int non_specifier(char c, char *buffer, int *tb, int *b)
 		error = overflow(buffer, tb, b);
 		if (error == -1)
 			return (-1);
-		buffer[*b] = c;
-		*b = *b + 1;
+		buffer[(*b)++] = c;
 	}
 	else
 	{
-		buffer[*b] = c;
-		*b = *b + 1;
+		buffer[(*b)++] = c;
 	}
-	if (*b >= BUFFER)
+	if (*b > BUFFER)
 		error = overflow(buffer, tb, b);
 	if (error == -1)
 		return (-1);
