@@ -64,8 +64,10 @@ int rot13(char *src, char *buffer, int *tb, int *b)
 			buffer[(*b)++] = res[i];
 			i++;
 		}
+		free(res);
 		return (0);
 	}
+	free(res);
 	return (-1);
 }
 
