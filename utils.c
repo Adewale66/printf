@@ -2,7 +2,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-char *rot14(char *src);
 /**
  * _strcpy -  copies the string pointed to by src
  * @dest : destination parameter
