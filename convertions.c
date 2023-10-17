@@ -52,7 +52,7 @@ char *convert_int (long num)
  * Return: char pointer (string)
  */
 
-char *convert_unsigned_int(unsigned long int num)
+char *convert_unsigned_int(unsigned long num)
 {
 	int length, i, temp;
 	char *str;
@@ -230,4 +230,3 @@ int convert_toHex(unsigned long int n, char c, char *buffer, int *b, int *tb)
 	}
 	return (-1);
 }
-
