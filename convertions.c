@@ -7,10 +7,11 @@
  * Return: char pointer (string)
  */
 
-char *convert_int(int num)
+char *convert_int (int num)
 {
-	int isNegative = 0, length, i, temp;
+	int isNegative = 0, length, i;
 	char *str;
+	int temp;
 
 	if (num < 0)
 	{
@@ -51,7 +52,7 @@ char *convert_int(int num)
  * Return: char pointer (string)
  */
 
-char *convert_unsigned_int(unsigned int num)
+char *convert_unsigned_int(unsigned long int num)
 {
 	int length, i, temp;
 	char *str;
@@ -80,12 +81,13 @@ char *convert_unsigned_int(unsigned int num)
 }
 
 /**
- * convert_bin - converts int to binary
+ * convert - converts int to binary
  * @num: int
+ * @type: base
  * Return: char *
  */
 
-char *convert_bin(unsigned int num)
+char *convert(unsigned long int num, int type)
 {
 	int i = 0, j = 0;
 	char *c = (char *) malloc(sizeof(char) * 32), *n;
@@ -102,12 +104,10 @@ char *convert_bin(unsigned int num)
 
 		while (num != 0)
 		{
-			if (num % 2 == 0)
-				c[i] = '0';
-			else
-				c[i] = '1';
+
+			c[i] = '0' + num % type;
 			i++;
-			num /= 2;
+			num /= type;
 		}
 	}
 
@@ -136,7 +136,7 @@ char *convert_bin(unsigned int num)
 
 int decToHexa(int n, char *buffer, int *b)
 {
-	char hexBuffer[9], ch, *res;
+	char hexBuffer[9], ch, *res, temp;
 	int index = 0, i, j, rem = 0;
 
 	while (n != 0)
@@ -154,71 +154,80 @@ int decToHexa(int n, char *buffer, int *b)
 	j = index - 1;
 	while (i <= j)
 	{
-		char temp = hexBuffer[i];
-
+		temp = hexBuffer[i];
 		hexBuffer[i] = hexBuffer[j];
 		hexBuffer[j] = temp;
 		i++;
 		j--;
 	}
 	res = (char *) malloc(_strlen(hexBuffer) + 1);
-
 	if (res != NULL)
+	{
 		_strcpy(res, hexBuffer);
-	buffer[(*b)++] = 92;
-	buffer[(*b)++] = 'x';
-	if (_strlen(res) < 2)
-		buffer[(*b)++] = '0';
-	buffer[(*b)++] = res[0];
-	if (_strlen(res) > 1)
-		buffer[(*b)++] = res[1];
-	free(res);
-	return (0);
+		buffer[(*b)++] = 92;
+		buffer[(*b)++] = 'x';
+		if (_strlen(res) < 2)
+			buffer[(*b)++] = '0';
+		buffer[(*b)++] = res[0];
+		if (_strlen(res) > 1)
+			buffer[(*b)++] = res[1];
+		free(res);
+		return (0);
+	}
+	return (-1);
 }
 
 /**
- * convert_oct - converts int to binary
- * @num: int
- * Return: char *
+ * conver_toHex - converts to hex
+ * @n: number to convert
+ * @c: type (lowercase or uppercase)
+ * @buffer: buffer
+ * @b: bytes
+ * @tb: total_bytes
+ * Return: int
  */
 
-char *convert_oct(unsigned int num)
+int convert_toHex(unsigned long int n, char c, char *buffer, int *b, int *tb)
 {
-	int i = 0, j = 0;
-	char *c = (char *) malloc(sizeof(char) * 32), *n;
+	char hexBuffer[9], ch, temp;
+	int index = 0, i, j, rem = 0, error = 0;
 
-	if (c == NULL)
-		return (NULL);
-	if (num == 0)
+	while (n != 0)
 	{
-		i = 1;
-		c[0] = '0';
-	}
-	else
-	{
-
-		while (num != 0)
+		rem = n % 16;
+		if (rem < 10)
+			ch = rem + '0';
+		else
 		{
-
-			c[i] = '0' + (num % 8);
-			i++;
-			num /= 8;
+			if (c == 'x')
+				ch = rem + 'a' - 10;
+			else
+				ch = rem + 'A' - 10;
 		}
+		hexBuffer[index++] = ch;
+		n = n / 16;
 	}
-
-	n = (char *) malloc(sizeof(char) * (i + 1));
-	if (n == NULL)
-		return (NULL);
-	while (j != i)
+	hexBuffer[index] = '\0';
+	i = 0;
+	j = index - 1;
+	while (i <= j)
 	{
-		n[j] = c[j];
-		j++;
+		temp = hexBuffer[i];
+		hexBuffer[i++] = hexBuffer[j];
+		hexBuffer[j--] = temp;
 	}
-	n[j] = '\0';
-	free(c);
-	reverse(n);
-
-	return (n);
+	if (_strlen(hexBuffer) > (BUFFER - *b))
+		error = overflow(buffer, tb, b);
+	if (error != -1)
+	{
+		i = 0;
+		while (hexBuffer[i] != '\0')
+		{
+			buffer[(*b)++] = hexBuffer[i];
+			i++;
+		}
+		return (0);
+	}
+	return (-1);
 }
-
 

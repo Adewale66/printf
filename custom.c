@@ -18,7 +18,7 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	int error = 0;
 
 	if (c == 'b')
-		error = handle_bin(va_arg(args, unsigned int), buffer, tb, b);
+		error = handle_bin(va_arg(args, unsigned long int), buffer, tb, b);
 	else if (c == 'R')
 		error = rot13(va_arg(args, char *), buffer, tb, b);
 	else if (c == 'S')
@@ -55,15 +55,12 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
  * Return: int
  */
 
-int handle_bin(unsigned int n, char *buffer, int *tb, int *b)
+int handle_bin(unsigned long int n, char *buffer, int *tb, int *b)
 {
 	char *bin;
 	int len, error = 0;
 
-	if (n > 4294967294)
-		return (-1);
-
-	bin = convert_bin(n);
+	bin = convert(n, 2);
 
 	if (bin == NULL)
 		return (-1);
