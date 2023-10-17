@@ -25,6 +25,6 @@ char *_strcpy(char *, char *);
 int handle_non_printable(char *, char *, int *, int *);
 int decToHexa(int, char *, int *);
 int unsigned_int(unsigned int, char *, int *, int *, char);
-int convert_toHex(unsigned long int, char, char *, int *, int *);
+int convert_toHex(unsigned int, char, char *, int *, int *);
 
 #endif

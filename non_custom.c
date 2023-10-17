@@ -31,7 +31,7 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	else if (c == 'o')
 		err = unsigned_int(va_arg(args, unsigned int), buffer, tb, b, c);
 	else if (c == 'x' || c == 'X')
-		err = convert_toHex(va_arg(args, unsigned long int), c, buffer, b, tb);
+		err = convert_toHex(va_arg(args, unsigned int), c, buffer, b, tb);
 	if (*b > BUFFER && err != -1)
 		err = overflow(buffer, tb, b);
 	if (err == -1)

@@ -187,7 +187,7 @@ int decToHexa(int n, char *buffer, int *b)
  * Return: int
  */
 
-int convert_toHex(unsigned long int n, char c, char *buffer, int *b, int *tb)
+int convert_toHex(unsigned int n, char c, char *buffer, int *b, int *tb)
 {
 	char hexBuffer[9], ch, temp;
 	int index = 0, i, j, rem = 0, error = 0;
