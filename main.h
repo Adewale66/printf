@@ -8,7 +8,7 @@ int _printf(const char *, ...);
 int overflow(char *, int *, int *);
 int handle_str(char *, char *, int *, int *);
 int handle_int(int, char *, int *, int *);
-int handle_bin(unsigned long int, char *, int *, int *);
+int handle_bin(unsigned long, char *, int *, int *);
 char *convert_int(long);
 char *convert_unsigned_int(unsigned long int);
 char *convert(unsigned long int, int);
