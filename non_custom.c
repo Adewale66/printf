@@ -20,7 +20,7 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	{
 		int t = va_arg(args, int);
 
-				buffer[(*b)++] = (char)t;
+		buffer[(*b)++] = t;
 	}
 	else if (c == 's')
 		err = handle_str(va_arg(args, char *), buffer, tb, b);
