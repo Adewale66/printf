@@ -12,7 +12,7 @@ int handle_bin(unsigned long, char *, int *, int *);
 char *convert_int(long);
 char *convert_unsigned_int(unsigned long int);
 char *convert(unsigned long, int);
-char *convert_oct (unsigned int);
+char *convert_oct(unsigned int);
 int non_specifier(char, char *, int *, int *);
 int non_custom_specifier(va_list, char, char *, int *, int *);
 int handle_unknown(char, char *, int *, int *);
