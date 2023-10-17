@@ -96,7 +96,10 @@ int handle_unknown(char c, char *buffer, int *total_bytes, int *bytes)
 	if (error != -1)
 	{
 		if (c == '%')
+		{
 			buffer[(*bytes)++] = '%';
+			return (0);
+		}
 		else if (c < 33 || c > 126)
 			return (-1);
 		buffer[(*bytes)++] = '%';
