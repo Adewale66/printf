@@ -35,10 +35,6 @@ int _printf(const char *ft, ...)
 				error = 0;
 			else if (*ft == 'u' || *ft == 'o' || *ft == 'x' || *ft == 'X')
 				error = non_custom_specifier(args, *ft, buffer, &total_bytes, &bytes);
-			if (check_for_flags() != 0)
-			{
-
-			}
 			else
 				error = handle_unknown(*ft, buffer, &total_bytes, &bytes);
 		}
@@ -51,7 +47,6 @@ int _printf(const char *ft, ...)
 	return (exit_program(args, buffer, total_bytes, bytes));
 }
 
-
 /**
  * exit_program - exits the program
  * @args: args
@@ -60,7 +55,6 @@ int _printf(const char *ft, ...)
  * @b: bytes
  * Return: int
  */
-
 
 int exit_program(va_list args, char *buffer, int tb, int b)
 {
@@ -77,7 +71,6 @@ int exit_program(va_list args, char *buffer, int tb, int b)
  * @args: args
  * Return: int
  */
-
 
 int exit_error(va_list args)
 {
@@ -119,7 +112,6 @@ int handle_unknown(char c, char *buffer, int *total_bytes, int *bytes)
  * @b: bytes
  * Return: int
  */
-
 
 int non_specifier(char c, char *buffer, int *tb, int *b)
 {
