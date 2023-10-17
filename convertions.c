@@ -52,11 +52,11 @@ char *convert_int (long num)
  * Return: char pointer (string)
  */
 
-char *convert_unsigned_int(unsigned long num)
+char *convert_unsigned_int(unsigned long int num)
 {
 	int length, i;
 	char *str;
-	unsigned long temp;
+	unsigned long int temp;
 
 	length = 1;
 
@@ -88,7 +88,7 @@ char *convert_unsigned_int(unsigned long num)
  * Return: char *
  */
 
-char *convert(unsigned long num, int type)
+char *convert(unsigned long int num, int type)
 {
 	int i = 0, j = 0;
 	char *c = (char *) malloc(sizeof(char) * 32), *n;
