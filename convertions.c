@@ -178,7 +178,7 @@ int decToHexa(int n, char *buffer, int *b)
 }
 
 /**
- * conver_toHex - converts to hex
+ * convert_toHex - converts to hex
  * @n: number to convert
  * @c: type (lowercase or uppercase)
  * @buffer: buffer

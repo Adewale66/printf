@@ -20,9 +20,9 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	{
 		int t = va_arg(args, unsigned int);
 
-		if (c == '\0' || t > 127)
+		if (c == '\0')
 			return (-1);
-		buffer[(*b)++] = t;
+		buffer[(*b)++] = (char)t;
 	}
 	else if (c == 's')
 		err = handle_str(va_arg(args, char*), buffer, tb, b);
