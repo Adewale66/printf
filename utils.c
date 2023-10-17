@@ -29,46 +29,27 @@ char *_strcpy(char *dest, char *src)
  * Return: int
  */
 
-int rot13(char *src, char *buffer, int *tb, int *b)
+int rot13(char *s, char *buffer, int *tb, int *b)
 {
-	char *res, *cchar;
-	int i = 0, error = 0;
+	int i, j, error = 0;
+	char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	char rot_val[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
 
-	if (src == NULL)
-		src = "(null)";
+	if (s == NULL)
+		s = "(null)";
 
-	res = (char *)malloc(_strlen(src) + 1);
-	if (res != NULL)
-	{
-		_strcpy(res, src);
-		cchar = res;
-
-		while (*cchar != '\0')
-		{
-			if ((*cchar >= 97 && *cchar <= 122) || (*cchar >= 65 && *cchar <= 90))
-			{
-				if (*cchar > 109 || (*cchar > 77 && *cchar < 91))
-					*cchar -= 13;
-				else
-					*cchar += 13;
-			}
-			cchar++;
-		}
-	}
-	if (_strlen(res) > (BUFFER - *b))
+	if (_strlen(s) > BUFFER - *b)
 		error = overflow(buffer, tb, b);
-	if (error != -1)
-	{
-		while (res[i] != '\0')
-		{
-			buffer[(*b)++] = res[i];
-			i++;
-		}
-		free(res);
-		return (0);
-	}
-	free(res);
-	return (-1);
+	if (error == -1)
+		return (-1);
+	for (i = 0; s[i] != '\0'; i++)
+		for (j = 0; j < 52; j++)
+			if (s[i] == characters[j])
+			{
+				buffer[(*b)++] = rot_val[j];
+				break;
+			}
+	return (0);
 }
 
 /**
