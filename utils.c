@@ -35,9 +35,9 @@ int rot13(char *src, char *buffer, int *tb, int *b)
 	int i = 0, error = 0;
 
 	if (src == NULL)
-		return (-1);
+		src = "(null)";
 
-	res = (char *) malloc(_strlen(src) + 1);
+	res = (char *)malloc(_strlen(src) + 1);
 	if (res != NULL)
 	{
 		_strcpy(res, src);
@@ -91,7 +91,6 @@ int overflow(char *buffer, int *tb, int *b)
 
 	return (0);
 }
-
 
 /**
  * _strlen - returns the length of a string.
