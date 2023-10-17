@@ -18,7 +18,7 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 
 	if (c == 'c')
 	{
-		int t = va_arg(args, int);
+		char t = va_arg(args, int);
 
 		buffer[(*b)++] = t;
 	}
