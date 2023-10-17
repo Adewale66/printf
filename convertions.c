@@ -7,7 +7,7 @@
  * Return: char pointer (string)
  */
 
-char *convert_int (long num)
+char *convert_int(long num)
 {
 	int isNegative = 0, length, i;
 	char *str;
@@ -25,7 +25,7 @@ char *convert_int (long num)
 	while (temp /= 10)
 		length++;
 
-	str = (char *) malloc(length + 1);
+	str = (char *)malloc(length + 1);
 
 	if (str == NULL)
 		return (NULL);
@@ -33,12 +33,11 @@ char *convert_int (long num)
 	i = length - 1;
 	str[i + 1] = '\0';
 
-
-	do {
+	do
+	{
 		str[i--] = num % 10 + '0';
 		num /= 10;
 	} while (num > 0);
-
 
 	if (isNegative)
 		str[0] = '-';
@@ -64,7 +63,7 @@ char *convert_unsigned_int(unsigned long int num)
 	while (temp /= 10)
 		length++;
 
-	str = (char *) malloc(length + 1);
+	str = (char *)malloc(length + 1);
 
 	if (str == NULL)
 		return (NULL);
@@ -72,8 +71,8 @@ char *convert_unsigned_int(unsigned long int num)
 	i = length - 1;
 	str[i + 1] = '\0';
 
-
-	do {
+	do
+	{
 		str[i--] = num % 10 + '0';
 		num /= 10;
 	} while (num > 0);
@@ -88,10 +87,10 @@ char *convert_unsigned_int(unsigned long int num)
  * Return: char *
  */
 
-char *convert(unsigned long int num, int type)
+char *convert(unsigned int num, int type)
 {
 	int i = 0, j = 0;
-	char *c = (char *) malloc(sizeof(char) * 32), *n;
+	char *c = (char *)malloc(sizeof(char) * 32), *n;
 
 	if (c == NULL)
 		return (NULL);
@@ -112,7 +111,7 @@ char *convert(unsigned long int num, int type)
 		}
 	}
 
-	n = (char *) malloc(sizeof(char) * (i + 1));
+	n = (char *)malloc(sizeof(char) * (i + 1));
 	if (n == NULL)
 		return (NULL);
 	while (j != i)
@@ -161,7 +160,7 @@ int decToHexa(int n, char *buffer, int *b)
 		i++;
 		j--;
 	}
-	res = (char *) malloc(_strlen(hexBuffer) + 1);
+	res = (char *)malloc(_strlen(hexBuffer) + 1);
 	if (res != NULL)
 	{
 		_strcpy(res, hexBuffer);

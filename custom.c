@@ -2,7 +2,6 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-
 /**
  * custom_specifier - handles custom specifiers
  * @args: args
@@ -23,7 +22,7 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 		error = rot13(va_arg(args, char *), buffer, tb, b);
 	else if (c == 'S')
 	{
-		char *s = va_arg(args, char*);
+		char *s = va_arg(args, char *);
 
 		if (s == NULL)
 			return (-1);
@@ -32,7 +31,7 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	else if (c == 'r')
 	{
 		char *c = va_arg(args, char *);
-		char *t = (char *) malloc(sizeof(char) * (_strlen(c) + 1));
+		char *t = (char *)malloc(sizeof(char) * (_strlen(c) + 1));
 
 		if (t == NULL)
 			return (-1);
@@ -55,7 +54,7 @@ int custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
  * Return: int
  */
 
-int handle_bin(unsigned long n, char *buffer, int *tb, int *b)
+int handle_bin(unsigned int n, char *buffer, int *tb, int *b)
 {
 	char *bin;
 	int len, error = 0;
@@ -78,7 +77,6 @@ int handle_bin(unsigned long n, char *buffer, int *tb, int *b)
 		return (-1);
 	return (0);
 }
-
 
 /**
  * handle_non_printable - hanldes non printable
