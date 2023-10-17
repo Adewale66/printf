@@ -1,6 +1,8 @@
 #include "main.h"
 #include <unistd.h>
+#include <stdlib.h>
 
+char *rot14(char *src);
 /**
  * _strcpy -  copies the string pointed to by src
  * @dest : destination parameter
@@ -21,36 +23,52 @@ char *_strcpy(char *dest, char *src)
 }
 /**
  * rot13 - encodes a string using rot13.
- * @s: string parameter
+ * @src: string parameter
  * @buffer: buffer
  * @tb: total_bytes
  * @b: bytes
  * Return: int
  */
 
-int rot13(char *s, char *buffer, int *tb, int *b)
+int rot13(char *src, char *buffer, int *tb, int *b)
 {
-	int i, j, error = 0;
-	char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	char rot_val[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+	char *res, *cchar;
+	int i = 0, error = 0;
 
-	if (s == NULL)
+	if (src == NULL)
 		return (-1);
 
-	if (_strlen(s) > BUFFER)
-		error = overflow(buffer, tb, b);
-	if (error == -1)
-		return (-1);
-	for (i = 0; s[i] != '\0'; i++)
-		for (j = 0; j < 52; j++)
-			if (s[i] == characters[j])
+	res = (char *) malloc(_strlen(src) + 1);
+	if (res != NULL)
+	{
+		_strcpy(res, src);
+		cchar = res;
+
+		while (*cchar != '\0')
+		{
+			if ((*cchar >= 97 && *cchar <= 122) || (*cchar >= 65 && *cchar <= 90))
 			{
-				buffer[(*b)++] = rot_val[j];
-				break;
+				if (*cchar > 109 || (*cchar > 77 && *cchar < 91))
+					*cchar -= 13;
+				else
+					*cchar += 13;
 			}
-	return (0);
+			cchar++;
+		}
+	}
+	if (_strlen(res) > (BUFFER - *b))
+		error = overflow(buffer, tb, b);
+	if (error != -1)
+	{
+		while (res[i] != '\0')
+		{
+			buffer[(*b)++] = res[i];
+			i++;
+		}
+		return (0);
+	}
+	return (-1);
 }
-
 
 /**
  * overflow - flushes buffer to stdio
