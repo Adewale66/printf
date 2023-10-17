@@ -25,7 +25,7 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 		buffer[(*b)++] = (char)t;
 	}
 	else if (c == 's')
-		err = handle_str(va_arg(args, char*), buffer, tb, b);
+		err = handle_str(va_arg(args, char *), buffer, tb, b);
 	else if (c == 'i' || c == 'd')
 		err = handle_int(va_arg(args, long), buffer, tb, b);
 	else if (c == 'u')
@@ -40,7 +40,6 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 		return (-1);
 	return (0);
 }
-
 
 /**
  * handle_int - handles integers
@@ -73,7 +72,6 @@ int handle_int(int n, char *buffer, int *tb, int *b)
 	return (0);
 }
 
-
 /**
  * handle_str - handles string modifier
  * @s: string parameter
@@ -83,13 +81,13 @@ int handle_int(int n, char *buffer, int *tb, int *b)
  * Return: void
  */
 
-
 int handle_str(char *s, char *buffer, int *tb, int *b)
 {
-	int s_len = _strlen(s), error = 0;
+	int s_len, error = 0;
 
 	if (s == NULL)
-		return (-1);
+		s = "(null)";
+	s_len = _strlen(s);
 
 	if (s_len > (BUFFER - *b))
 		error = overflow(buffer, tb, b);
