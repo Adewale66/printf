@@ -87,7 +87,7 @@ char *convert_unsigned_int(unsigned long int num)
  * Return: char *
  */
 
-char *convert(unsigned long int num, int type)
+char *convert(unsigned long num, int type)
 {
 	int i = 0, j = 0;
 	char *c = (char *) malloc(sizeof(char) * 32), *n;
