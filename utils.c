@@ -31,7 +31,7 @@ char *_strcpy(char *dest, char *src)
 
 int rot13(char *s, char *buffer, int *tb, int *b)
 {
-	int i, j, error = 0;
+	int i, j, k, error = 0;
 	char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	char rot_val[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
 
@@ -42,13 +42,18 @@ int rot13(char *s, char *buffer, int *tb, int *b)
 		error = overflow(buffer, tb, b);
 	if (error == -1)
 		return (-1);
-	for (i = 0; s[i] != '\0'; i++)
-		for (j = 0; j < 52; j++)
+	for (i = 0; s[i]; i++)
+	{
+		k = 0;
+		for (j = 0; characters[j] && !k; j++)
 			if (s[i] == characters[j])
 			{
 				buffer[(*b)++] = rot_val[j];
-				break;
+				k = 1;
 			}
+		if (!k)
+			buffer[(*b)++] = s[i];
+	}
 	return (0);
 }
 
