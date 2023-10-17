@@ -35,6 +35,10 @@ int _printf(const char *ft, ...)
 				error = 0;
 			else if (*ft == 'u' || *ft == 'o' || *ft == 'x' || *ft == 'X')
 				error = non_custom_specifier(args, *ft, buffer, &total_bytes, &bytes);
+			if (check_for_flags() != 0)
+			{
+
+			}
 			else
 				error = handle_unknown(*ft, buffer, &total_bytes, &bytes);
 		}
