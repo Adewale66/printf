@@ -51,7 +51,7 @@ char *convert_int(long num)
  * Return: char pointer (string)
  */
 
-char *convert_unsigned_int(unsigned long int num)
+char *convert_unsigned_int(unsigned int num)
 {
 	int length, i;
 	char *str;

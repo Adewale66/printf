@@ -27,9 +27,9 @@ int non_custom_specifier(va_list args, char c, char *buffer, int *tb, int *b)
 	else if (c == 'i' || c == 'd')
 		err = handle_int(va_arg(args, long), buffer, tb, b);
 	else if (c == 'u')
-		err = unsigned_int(va_arg(args, unsigned long int), buffer, tb, b, c);
+		err = unsigned_int(va_arg(args, unsigned int), buffer, tb, b, c);
 	else if (c == 'o')
-		err = unsigned_int(va_arg(args, unsigned long int), buffer, tb, b, c);
+		err = unsigned_int(va_arg(args, unsigned int), buffer, tb, b, c);
 	else if (c == 'x' || c == 'X')
 		err = convert_toHex(va_arg(args, unsigned long int), c, buffer, b, tb);
 	if (*b > BUFFER && err != -1)
@@ -108,7 +108,7 @@ int handle_str(char *s, char *buffer, int *tb, int *b)
  * Return: void
  */
 
-int unsigned_int(unsigned long int n, char *buff, int *tb, int *b, char t)
+int unsigned_int(unsigned int n, char *buff, int *tb, int *b, char t)
 {
 	char *int_str = t == 'o' ? convert(n, 8) : convert_unsigned_int(n);
 	int len, error = 0;
